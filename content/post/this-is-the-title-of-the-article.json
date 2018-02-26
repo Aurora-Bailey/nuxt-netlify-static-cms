@@ -1,0 +1,12 @@
+{
+"author": "Author of the article",
+  "title": "This is the title of the article",
+  "date": "2018-02-26T18:35:02.929Z",
+  "tags": [
+    "gat",
+    "asdf",
+    "234"
+  ],
+  "content": "**Bold text**\n\n## Heading 2\n\n<img src=\"/img/lucia-101.jpg\" />\n\n<div>asdf</div>\n\n<p>p</p>"
+}
+
