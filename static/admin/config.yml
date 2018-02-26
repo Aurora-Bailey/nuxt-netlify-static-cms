@@ -1,0 +1,37 @@
+backend:
+  name: git-gateway
+  branch: master # Branch to update (optional; defaults to master)
+
+# publish_mode: editorial_workflow
+media_folder: "static/img" # Media files will be stored in the repo under static/images
+public_folder: "/img" # The src attribute for uploaded media will begin with /images
+
+collections: # A list of collections the CMS should be able to edit
+  - name: "post" # Used in routes, ie.: /admin/collections/:slug/edit
+    label: "Post" # Used in the UI, ie.: "New Post"
+    folder: "content/post" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., "{{year}}-{{month}}-{{day}}-{{slug}}" YYYY-MM-DD-title.md
+    fields: # The fields each document in this collection have
+      - {label: "Author", name: "author", widget: "string"}
+      - {label: "Author Avatar", name: "authorAvatar", widget: "image", required: false}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Image", name: "image", widget: "image", required: false}
+      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "content/about.md"
+        label: "About"
+        name: "about"
+        fields:
+          - {label: "Comments", name: "comments", widget: "boolean"}
+          - {label: "Date", name: "date", widget: "datetime"}
+          - {label: "Draft", name: "draft", widget: "boolean"}
+          - {label: "No Author", name: "noauthor", widget: "boolean"}
+          - {label: "Share", name: "share", widget: "boolean"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Type", name: "type", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
