@@ -12,7 +12,7 @@ collections: # A list of collections the CMS should be able to edit
     folder: "content/post" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{slug}}" # Filename template, e.g., "{{year}}-{{month}}-{{day}}-{{slug}}" YYYY-MM-DD-title.md
-    extension: "md"
+    extension: "json"
     format: "json-frontmatter"
     fields: # The fields each document in this collection have
       - {label: "Author", name: "author", widget: "string"}
@@ -21,9 +21,11 @@ collections: # A list of collections the CMS should be able to edit
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Image", name: "image", widget: "image", required: false}
       - {label: "Tags", name: "tags", widget: "list"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Body", name: "content", widget: "markdown"}
   - name: "pages"
     label: "Pages"
+    extension: "json"
+    format: "json-frontmatter"
     files:
       - file: "content/about.md"
         label: "About"
@@ -36,4 +38,4 @@ collections: # A list of collections the CMS should be able to edit
           - {label: "Share", name: "share", widget: "boolean"}
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Type", name: "type", widget: "string"}
-          - {label: "Body", name: "body", widget: "markdown"}
+          - {label: "Body", name: "content", widget: "markdown"}
