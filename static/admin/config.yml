@@ -12,7 +12,7 @@ collections: # A list of collections the CMS should be able to edit
     folder: "content/post" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{slug}}" # Filename template, e.g., "{{year}}-{{month}}-{{day}}-{{slug}}" YYYY-MM-DD-title.md
-    extension: "json"
+    extension: "md"
     format: "json-frontmatter"
     fields: # The fields each document in this collection have
       - {label: "Author", name: "author", widget: "string"}
