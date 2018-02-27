@@ -28,7 +28,7 @@
       }
     },
     async asyncData ({params, error, payload}) {
-      return import(`../../../content/post/${params.slug}`)
+      return import(`../../../content/post/${params.slug}.json`)
     }
   }
 </script>

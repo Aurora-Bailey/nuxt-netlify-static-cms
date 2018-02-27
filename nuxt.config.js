@@ -4,22 +4,22 @@ const fs = require('fs')
 var posts = []
 const postFolder = './content/post'
 fs.readdirSync(postFolder).forEach(file => {
-  posts.push(file) // slug.json
+  posts.push(file.split('.')[0]) // slug.json
 })
 
 // Generate a directory
 var directory = []
 var taglist = {}
 posts.forEach(post => {
-  let data = JSON.parse(fs.readFileSync(postFolder + '/' + post))
+  let data = JSON.parse(fs.readFileSync(postFolder + '/' + post + '.json'))
 
   // load directory
-  directory.push({slug: post.split('.')[0], title: data.title, date: new Date(data.date).getTime()})
+  directory.push({slug: post, title: data.title, date: new Date(data.date).getTime()})
 
   // load taglist
   data.tags.forEach(tag => {
     if(!taglist[tag]) taglist[tag] = []
-    taglist[tag].push({slug: post.split('.')[0], title: data.title, date: new Date(data.date).getTime()})
+    taglist[tag].push({slug: post, title: data.title, date: new Date(data.date).getTime()})
   })
 })
 
