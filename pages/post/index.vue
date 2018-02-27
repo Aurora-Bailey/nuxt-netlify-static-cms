@@ -34,7 +34,7 @@
       }
     },
     async asyncData ({params, error, payload}) {
-      return import(`../../directory-generate/all/directory.json`)
+      return import(`../../json-db/all/directory.json`)
     }
   }
 </script>

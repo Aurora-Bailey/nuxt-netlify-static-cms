@@ -9,24 +9,24 @@ fs.readdirSync(postFolder).forEach(file => {
 
 // Generate a directory
 var directory = []
-var categories = {}
+var taglist = {}
 posts.forEach(post => {
   let data = JSON.parse(fs.readFileSync(postFolder + '/' + post))
 
   // load directory
   directory.push({slug: post.split('.')[0], title: data.title, date: new Date(data.date).getTime()})
 
-  // load categories
+  // load taglist
   data.tags.forEach(tag => {
-    if(!categories[tag]) categories[tag] = []
-    categories[tag].push({slug: post.split('.')[0], title: data.title, date: new Date(data.date).getTime()})
+    if(!taglist[tag]) taglist[tag] = []
+    taglist[tag].push({slug: post.split('.')[0], title: data.title, date: new Date(data.date).getTime()})
   })
 })
 
 // make sure paths exist
-if (!fs.existsSync('./directory-generate')) fs.mkdirSync('./directory-generate')
-if (!fs.existsSync('./directory-generate/cat')) fs.mkdirSync('./directory-generate/cat')
-if (!fs.existsSync('./directory-generate/all')) fs.mkdirSync('./directory-generate/all')
+if (!fs.existsSync('./json-db')) fs.mkdirSync('./json-db')
+if (!fs.existsSync('./json-db/tag')) fs.mkdirSync('./json-db/tag')
+if (!fs.existsSync('./json-db/all')) fs.mkdirSync('./json-db/all')
 
 // Sort and write directory
 directory.sort((a, b) => {
@@ -34,19 +34,19 @@ directory.sort((a, b) => {
   if (a.date > b.date) return -1
   return 0
 })
-fs.writeFileSync('./directory-generate/all/directory.json', JSON.stringify({directory}))
+fs.writeFileSync('./json-db/all/directory.json', JSON.stringify({directory}))
 
-// sort and write categories
-for (var cat in categories) {
-  categories[cat].sort((a, b) => {
+// sort and write taglist
+for (var tag in taglist) {
+  taglist[tag].sort((a, b) => {
     if (a.date < b.date) return 1
     if (a.date > b.date) return -1
     return 0
   })
 }
-for (var cat in categories) {
-  let safecat = cat.replace(/[^a-z0-9]/gi, '-').toLowerCase()
-  fs.writeFileSync(`./directory-generate/cat/${safecat}.json`, JSON.stringify({categories: categories[cat]}))
+for (var tag in taglist) {
+  let safetag = tag.replace(/[^a-z0-9]/gi, '-').toLowerCase()
+  fs.writeFileSync(`./json-db/tag/${safetag}.json`, JSON.stringify({taglist: taglist[tag]}))
 }
 
 module.exports = {
