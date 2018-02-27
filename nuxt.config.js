@@ -23,6 +23,11 @@ posts.forEach(post => {
   })
 })
 
+// make sure paths exist
+if (!fs.existsSync('./directory-generate')) fs.mkdirSync('./directory-generate')
+if (!fs.existsSync('./directory-generate/cat')) fs.mkdirSync('./directory-generate/cat')
+if (!fs.existsSync('./directory-generate/all')) fs.mkdirSync('./directory-generate/all')
+
 // Sort and write directory
 directory.sort((a, b) => {
   if (a.date < b.date) return 1
