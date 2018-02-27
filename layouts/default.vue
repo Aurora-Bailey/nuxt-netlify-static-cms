@@ -88,11 +88,8 @@
         fixed: false,
         items: [
           { icon: 'apps', title: 'Welcome', to: '/' },
-          { icon: 'apps', title: 'Post', to: '/post/asdf' },
           { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' },
-          { icon: 'bubble_chart', title: 'post/another-title', to: '/post/another-title' },
-          { icon: 'bubble_chart', title: 'post/10-ways-to-lose-weight-fast', to: '/post/10-ways-to-lose-weight-fast' },
-          { icon: 'bubble_chart', title: 'post/this-is-the-title-of-the-article', to: '/post/this-is-the-title-of-the-article' }
+          { icon: 'bubble_chart', title: 'post', to: '/post' }
         ],
         miniVariant: false,
         right: true,

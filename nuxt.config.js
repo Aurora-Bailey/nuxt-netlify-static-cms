@@ -1,10 +1,48 @@
+const fs = require('fs')
+
 // Get the list of posts
 var posts = []
 const postFolder = './content/post'
-const fs = require('fs')
 fs.readdirSync(postFolder).forEach(file => {
-  posts.push(file)
+  posts.push(file) // slug.json
 })
+
+// Generate a directory
+var directory = []
+var categories = {}
+posts.forEach(post => {
+  let data = JSON.parse(fs.readFileSync(postFolder + '/' + post))
+
+  // load directory
+  directory.push({slug: post.split('.')[0], title: data.title, date: new Date(data.date).getTime()})
+
+  // load categories
+  data.tags.forEach(tag => {
+    if(!categories[tag]) categories[tag] = []
+    categories[tag].push({slug: post.split('.')[0], title: data.title, date: new Date(data.date).getTime()})
+  })
+})
+
+// Sort and write directory
+directory.sort((a, b) => {
+  if (a.date < b.date) return 1
+  if (a.date > b.date) return -1
+  return 0
+})
+fs.writeFileSync('./directory-generate/all/directory.json', JSON.stringify({directory}))
+
+// sort and write categories
+for (var cat in categories) {
+  categories[cat].sort((a, b) => {
+    if (a.date < b.date) return 1
+    if (a.date > b.date) return -1
+    return 0
+  })
+}
+for (var cat in categories) {
+  let safecat = cat.replace(/[^a-z0-9]/gi, '-').toLowerCase()
+  fs.writeFileSync(`./directory-generate/cat/${safecat}.json`, JSON.stringify({categories: categories[cat]}))
+}
 
 module.exports = {
   /*
