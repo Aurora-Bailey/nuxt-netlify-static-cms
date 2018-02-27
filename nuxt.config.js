@@ -1,3 +1,11 @@
+// Get the list of posts
+var posts = []
+const postFolder = './content/post'
+const fs = require('fs')
+fs.readdirSync(postFolder).forEach(file => {
+  posts.push(file)
+})
+
 module.exports = {
   /*
   ** Headers of the page
@@ -27,6 +35,18 @@ module.exports = {
   */
   render: {
     resourceHints: false
+  },
+  /*
+  ** Generate dynamic routs
+  */
+  generate: {
+    routes: function () {
+      return posts.map((post) => {
+        return {
+          route: '/post/' + post
+        }
+      })
+    }
   },
   /*
   ** Build configuration
