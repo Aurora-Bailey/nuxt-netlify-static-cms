@@ -1,53 +1,4 @@
-const fs = require('fs')
-
-// Get the list of posts
-var posts = []
-const postFolder = './content/post'
-fs.readdirSync(postFolder).forEach(file => {
-  posts.push(file.split('.')[0]) // slug.json
-})
-
-// Generate a directory
-var directory = []
-var taglist = {}
-posts.forEach(post => {
-  let data = JSON.parse(fs.readFileSync(postFolder + '/' + post + '.json'))
-
-  // load directory
-  directory.push({slug: post, title: data.title, date: new Date(data.date).getTime()})
-
-  // load taglist
-  data.tags.forEach(tag => {
-    if(!taglist[tag]) taglist[tag] = []
-    taglist[tag].push({slug: post, title: data.title, date: new Date(data.date).getTime()})
-  })
-})
-
-// make sure paths exist
-if (!fs.existsSync('./json-db')) fs.mkdirSync('./json-db')
-if (!fs.existsSync('./json-db/tag')) fs.mkdirSync('./json-db/tag')
-if (!fs.existsSync('./json-db/all')) fs.mkdirSync('./json-db/all')
-
-// Sort and write directory
-directory.sort((a, b) => {
-  if (a.date < b.date) return 1
-  if (a.date > b.date) return -1
-  return 0
-})
-fs.writeFileSync('./json-db/all/directory.json', JSON.stringify({directory}))
-
-// sort and write taglist
-for (var tag in taglist) {
-  taglist[tag].sort((a, b) => {
-    if (a.date < b.date) return 1
-    if (a.date > b.date) return -1
-    return 0
-  })
-}
-for (var tag in taglist) {
-  let safetag = tag.replace(/[^a-z0-9]/gi, '-').toLowerCase()
-  fs.writeFileSync(`./json-db/tag/${safetag}.json`, JSON.stringify({taglist: taglist[tag]}))
-}
+var jsonDB = require('./json-db-gen.js')
 
 module.exports = {
   /*
@@ -84,11 +35,7 @@ module.exports = {
   */
   generate: {
     routes: function () {
-      return posts.map((post) => {
-        return {
-          route: '/post/' + post
-        }
-      })
+      return jsonDB.routes
     }
   },
   /*

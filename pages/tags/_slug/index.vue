@@ -5,10 +5,10 @@
         <img src="/v.png" alt="Vuetify.js" class="mb-5" />
       </div>
       <v-card>
-        <v-card-title class="headline">Welcome to the Vuetify + Nuxt.js template POST post index</v-card-title>
+        <v-card-title class="headline">{{ tag }}</v-card-title>
         <v-card-text>
           <ul>
-            <li v-for="post in directory">
+            <li v-for="post in taglist">
               <nuxt-link :to="`/post/${post.slug}`">{{ post.title }}</nuxt-link>
             </li>
           </ul>
@@ -19,7 +19,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" flat nuxt to="/all/2" v-if="total > 1">More</v-btn>
+          <v-btn color="primary" flat nuxt :to="`/tags/${tag}/2`" v-if="total > 1">More</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -34,7 +34,8 @@
       }
     },
     async asyncData ({params, error, payload}) {
-      return import(`../../json-db/all/directory_${1}.json`)
+      console.log(params)
+      return import(`../../../json-db/tag/${params.slug}_${1}.json`)
     }
   }
 </script>
