@@ -19,7 +19,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" flat nuxt :to="`/tags/${tag}/2`" v-if="total > 1">More</v-btn>
+          <v-btn color="primary" flat nuxt :to="`/tag/${tag}/${page + 1}`" v-if="page < total">More</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -35,7 +35,7 @@
     },
     async asyncData ({params, error, payload}) {
       console.log(params)
-      return import(`../../../json-db/tag/${params.slug}_${1}.json`)
+      return import(`../../../../json-db/tag/${params.slug}_${params.page}.json`)
     }
   }
 </script>
