@@ -34,7 +34,6 @@
       }
     },
     async asyncData ({params, error, payload}) {
-      console.log(params)
       return import(`../../../../json-db/tag/${params.slug}_${params.page}.json`)
     }
   }

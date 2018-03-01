@@ -1,4 +1,5 @@
 const fs = require('fs')
+var routes = [] // output for nuxt.config routes
 
 // Get the list of posts
 var posts = []
@@ -21,6 +22,9 @@ posts.forEach(post => {
     if(!taglist[tag]) taglist[tag] = []
     taglist[tag].push({slug: post, title: data.title, date: new Date(data.date).getTime()})
   })
+
+  // build routes
+  routes.push({ route: `/post/${post}` })
 })
 
 // make sure paths exist
@@ -47,6 +51,7 @@ for (var tag in taglist) {
 var directory_paginated = paginate(30, directory)
 for (var i = 0; i < directory_paginated.length; i++) {
   let p = directory_paginated[i]
+  routes.push({ route: '/all/' + p.page })
   fs.writeFileSync(`./json-db/all/directory_${p.page}.json`, JSON.stringify({directory: p.chunk, page: p.page, total: directory_paginated.length}))
 }
 if (directory.length == 0) fs.writeFileSync(`./json-db/all/directory_1.json`, JSON.stringify({directory: [], page: 1, total: directory_paginated.length})) // make sure at least one page exists
@@ -55,37 +60,17 @@ if (directory.length == 0) fs.writeFileSync(`./json-db/all/directory_1.json`, JS
 
 for (var tag in taglist) {
   let safetag = tag.replace(/[^a-z0-9]/gi, '-').toLowerCase()
-  console.log('paginate ', safetag)
   let tags_paginated = paginate(20, taglist[tag])
   if (tags_paginated.length == 0) console.log('tags_paginated')
   if (tags_paginated.length == 0) console.log(tags_paginated)
   if (tags_paginated.length == 0) console.log(taglist[tag])
   for (let i = 0; i < tags_paginated.length; i++) {
     let p = tags_paginated[i]
-    console.log('page ', `./json-db/tag/${safetag}_${p.page}.json`)
+    routes.push({ route: `/tag/${safetag}/${p.page}` })
     fs.writeFileSync(`./json-db/tag/${safetag}_${p.page}.json`, JSON.stringify({taglist: p.chunk, page: p.page, total: tags_paginated.length, tag: safetag}))
-    console.log('write ', `./json-db/tag/${safetag}_${p.page}.json`)
   }
   //fs.writeFileSync(`./json-db/tag/${safetag}.json`, JSON.stringify({taglist: taglist[tag]}))
 }
-
-
-/*
-** Build final routes
-*/
-var routes = []
-// add posts
-directory.forEach(d => {
-  routes.push({
-    route: '/post/' + d.slug
-  })
-})
-// add pages of posts
-directory_paginated.forEach(d => {
-  routes.push({
-    route: '/all/' + d.page
-  })
-})
 
 /*
 ** General functions
