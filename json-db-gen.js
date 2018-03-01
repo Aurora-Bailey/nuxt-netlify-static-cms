@@ -64,6 +64,7 @@ for (var tag in taglist) {
   if (tags_paginated.length == 0) console.log('tags_paginated')
   if (tags_paginated.length == 0) console.log(tags_paginated)
   if (tags_paginated.length == 0) console.log(taglist[tag])
+  routes.push({ route: `/tag/${safetag}` })
   for (let i = 0; i < tags_paginated.length; i++) {
     let p = tags_paginated[i]
     routes.push({ route: `/tag/${safetag}/${p.page}` })
