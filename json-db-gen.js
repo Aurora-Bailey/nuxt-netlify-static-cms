@@ -26,7 +26,8 @@ posts.forEach(post => {
   // build routes
   routes.push({ route: `/post/${post}` })
 })
-
+// clear
+deleteFolderRecursive('./json-db')
 // make sure paths exist
 if (!fs.existsSync('./json-db')) fs.mkdirSync('./json-db')
 if (!fs.existsSync('./json-db/tag')) fs.mkdirSync('./json-db/tag')
@@ -76,6 +77,20 @@ for (var tag in taglist) {
 /*
 ** General functions
 */
+function deleteFolderRecursive ( path ) {
+  if (fs.existsSync(path)) {
+    fs.readdirSync(path).forEach(function(file, index){
+      var curPath = path + "/" + file
+      if (fs.lstatSync(curPath).isDirectory()) { // recurse
+        deleteFolderRecursive(curPath)
+      } else { // delete file
+        fs.unlinkSync(curPath)
+      }
+    });
+    fs.rmdirSync(path)
+  }
+};
+
 function paginate( itemsPerPage, array) {
   let r = []
   let chunk = []
