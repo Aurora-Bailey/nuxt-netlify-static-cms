@@ -5,6 +5,6 @@
   "tags": [
     "tag tag2"
   ],
-  "content": "body"
+  "content": "<template>\r\n\n  <v-container grid-list-md text-xs-center>\r\n\n\\    <v-layout row wrap>\r\n\n\\    <v-flex xs12>\r\n\n\\    <v-card dark color=\"primary\">\r\n\n\\    <v-card-text class=\"px-0\">12</v-card-text>\r\n\n\\    </v-card>\r\n\n\\    </v-flex>\r\n\n\\    <v-flex xs6 v-for=\"i in 2\" :key=\"\\`6${i}\\`\">\r\n\n\\    <v-card dark color=\"secondary\">\r\n\n\\    <v-card-text class=\"px-0\">6</v-card-text>\r\n\n\\    </v-card>\r\n\n\\    </v-flex>\r\n\n\\    <v-flex xs4 v-for=\"i in 3\" :key=\"\\`4${i}\\`\">\r\n\n\\    <v-card dark color=\"primary\">\r\n\n\\    <v-card-text class=\"px-0\">4</v-card-text>\r\n\n\\    </v-card>\r\n\n\\    </v-flex>\r\n\n\\    <v-flex xs3 v-for=\"i in 4\" :key=\"\\`3${i}\\`\">\r\n\n\\    <v-card dark color=\"secondary\">\r\n\n\\    <v-card-text class=\"px-0\">3</v-card-text>\r\n\n\\    </v-card>\r\n\n\\    </v-flex>\r\n\n\\    <v-flex xs2 v-for=\"i in 6\" :key=\"\\`2${i}\\`\">\r\n\n\\    <v-card dark color=\"primary\">\r\n\n\\    <v-card-text class=\"px-0\">2</v-card-text>\r\n\n\\    </v-card>\r\n\n\\    </v-flex>\r\n\n\\    <v-flex xs1 v-for=\"i in 12\" :key=\"\\`1${i}\\`\">\r\n\n\\    <v-card dark color=\"secondary\">\r\n\n\\    <v-card-text class=\"px-0\">1</v-card-text>\r\n\n\\    </v-card>\r\n\n\\    </v-flex>\r\n\n\\    </v-layout>\r\n\n  </v-container>\r\n\n</template>"
 }
 
