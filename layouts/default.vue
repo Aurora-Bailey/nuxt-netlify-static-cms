@@ -35,25 +35,6 @@
         <v-card-text class="white--text">
           &copy;2018 — <strong>Vuetify</strong>
         </v-card-text>
-        <v-card-text>
-          <div itemscope itemtype="http://schema.org/ItemList">
-            <link itemprop="url" href="http://multivarki.ru?filters%5Bprice%5D%5BLTE%5D=39600" />
-            <span itemprop="numberOfItems">315</span>
-            <div itemprop="itemListElement" itemscope itemtype="http://schema.org/Product">
-              <img alt="Photo of product" itemprop="image"
-               src="http://img01.multivarki.ru.ru/c9/f1/a5fe6642-18d0-47ad-b038-6fca20f1c923.jpeg" />
-              <a itemprop="url" href="http://multivarki.ru/brand_502/">
-                <span itemprop="name">BRAND 502</span>
-              </a>
-              <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                <span itemprop="price">4399 р.</span>
-              </div>...
-              <div itemprop="itemListElement" itemtype="http://schema.org/Product">
-              ...
-              </div>
-            </div>
-          </div>
-        </v-card-text>
       </v-card>
     </v-footer>
   </v-app>
