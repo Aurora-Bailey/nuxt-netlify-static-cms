@@ -13,10 +13,14 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' },
+      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.8/css/all.css' }
     ]
   },
-  plugins: ['~/plugins/vuetify.js'],
+  plugins: [
+    '~/plugins/vuetify.js',
+    '~/plugins/vmarked.js'
+  ],
   css: [
     '~/assets/style/app.styl'
   ],
@@ -43,7 +47,8 @@ module.exports = {
   */
   build: {
     vendor: [
-      '~/plugins/vuetify.js'
+      '~/plugins/vuetify.js',
+      '~/plugins/vmarked.js'
     ],
     extractCSS: true,
     /*

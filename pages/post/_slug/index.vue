@@ -9,7 +9,7 @@
         <v-card-text>
           {{ date }}
           <br>
-          {{ content }}
+          <v-marked>{{content}}</v-marked>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
